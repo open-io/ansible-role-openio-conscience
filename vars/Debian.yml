@@ -1,8 +1,8 @@
-# roles/ROLENAME/vars/Debian.yml
+# roles/conscience/vars/Debian.yml
 # Distribution-specific variables for Ubuntu, Debian, ...
 ---
-ROLENAME_packages:
-  - ROLENAME
+conscience_packages:
+  - conscience
 
-ROLENAME_service: ROLENAMEd
+conscience_service: conscienced
 ...

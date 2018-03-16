@@ -1,4 +1,4 @@
-# roles/ROLENAME/tasks/main.yml
+# roles/conscience/tasks/main.yml
 ---
 - name: "Include {{ ansible_distribution }} variables"
   include_vars: "{{ item }}"
@@ -28,10 +28,27 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
-- name: Ensure service is started
-  service:
-    name: "{{ ROLENAME_service }}"
-    state: started
-    enabled: true
-  tags: configure
+- name: Ensure directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: openio
+    group: openio
+    mode: 0755
+  with_items:
+    - "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}"
+  tags: install
+
+- name: Generate configuration files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: openio
+    group: openio
+    mode: 0644
+  with_items:
+    - { src: "conscience.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}.conf" }
+    - { src: "services.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf" }
+    - { src: "storage.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf" }
+
 ...

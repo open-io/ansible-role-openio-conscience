@@ -1,5 +1,92 @@
-# roles/ROLENAME/defaults/main.yml
+# roles/conscience/defaults/main.yml
 ---
-openio_sds_release: 17.04
-openio_ROLENAME_repo_managed: false
+openio_conscience_namespace: "OPENIO"
+openio_conscience_serviceid: "0"
+
+openio_conscience_namespace_status: "standalone"
+openio_conscience_bind_address: "{{ ansible_default_ipv4.address }}"
+openio_conscience_bind_port: 6000
+openio_conscience_chunk_size: 10485760
+openio_conscience_timeout_read_operations: 1000
+openio_conscience_timeout_accepting_connection: 1000
+
+openio_conscience_worm: false
+openio_conscience_auto_container: false
+
+openio_conscience_libdir: /usr/lib
+openio_conscience_sysconfig_dir: /etc/oio/sds
+
+openio_conscience_server:
+  workers_min: 2
+  workers_max: 10
+  workers_spare_min: 2
+  workers_spare_max: 10
+  listening_address:  "{{ openio_conscience_bind_address }}:{{ openio_conscience_bind_port }}"
+  plugins: "{{ openio_conscience_plugins | map(attribute='name') | join(',')}}"
+
+openio_conscience_plugins:
+  - name: stats
+    path: "{{ openio_conscience_libdir }}/grid/msg_stats.so"
+  - name: ping
+    path: "{{ openio_conscience_libdir }}/grid/msg_ping.so"
+  - name: fallback
+    path: "{{ openio_conscience_libdir }}/grid/msg_fallback.so"
+  - name: conscience
+    path: "{{ openio_conscience_libdir }}/grid/msg_conscience.so"
+    param_namespace: "{{ openio_conscience_namespace }}"
+
+openio_conscience_multiple: {}
+# openio_conscience_multiple:
+#  me: "{{ openio_conscience_bind_address }}:18000"
+#  group:
+#    - 172.17.0.2:18000
+#    - 172.17.0.3:18000
+
+openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
+openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}-service*.conf"
+
+openio_conscience_pools: []
+#  - name: rawx21
+#    targets:
+#      - where: rawx-europe
+#        type: rawx
+#        count: 3
+#      - where: rawx-asia
+#        type: rawx
+#        count: 1
+#    min_dist: 2
+
+openio_conscience_storage_policies_custom: {}
+
+openio_conscience_data_security_custom: {}
+
+openio_conscience_services:
+  meta0:
+    score_expr: "root(2,((num stat.cpu) * ((num stat.io)+1)))"
+    score_timeout: 3600
+  meta1:
+    score_expr: "((num stat.space)>=5) * root(3,(((num stat.cpu)+1)*(num stat.space)*((num stat.io)+1)))"
+    score_timeout: 120
+  meta2:
+    score_expr: "((num stat.space)>=5) * root(3,(((num stat.cpu)+1)*(num stat.space)*((num stat.io)+1)))"
+    score_timeout: 120
+  rawx:
+    score_expr: "(num tag.up) * ((num stat.space)>=5) * root(3,(((num stat.cpu)+1)*(num stat.space)*((num stat.io)+1)))"
+    score_timeout: 120
+  sqlx:
+    score_expr: "((num stat.space)>=5) * root(3,(((num stat.cpu)+1)*(num stat.space)*((num stat.io)+1)))"
+    score_timeout: 120
+  rdir:
+    score_expr: "(num tag.up) * ((num stat.cpu)+1) * ((num stat.space)>=2)"
+    score_timeout: 120
+  redis:
+    score_expr: "(num tag.up) * ((num stat.cpu)+1)"
+    score_timeout: 120
+  oiofs:
+    score_expr: "((num stat.cpu)+1)"
+    score_timeout: 120
+  account:
+    score_expr: "(num tag.up) * ((num stat.cpu)+1)"
+    score_timeout: 120
+
 ...

@@ -1,8 +1,7 @@
-# roles/ROLENAME/vars/RedHat.yml
+# roles/conscience/vars/RedHat.yml
 # Distribution-specific variables for RHEL, CentOS, ...
 ---
-ROLENAME_packages:
-  - ROLENAME
+conscience_packages:
+  - openio-sds-common
 
-ROLENAME_service: ROLENAMEd
 ...

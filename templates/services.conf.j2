@@ -1,0 +1,52 @@
+# {{ ansible_managed }}
+# Service pools declarations
+# ----------------------------
+#
+# Pools are automatically created if not defined in configuration,
+# according to storage policy or service update policy rules.
+#
+# "targets" is a ';'-separated list.
+# Each target is a ','-separated list of:
+# - the number of services to pick,
+# - the name of a slot where to pick the services,
+# - the name of a slot where to pick services if there is
+#   not enough in the previous slot
+# - and so on...
+#
+# "nearby_mode" is a boolean telling to find services close to each other
+# instead of far from each other.
+#
+#### power user options, don't set them unless you know what you are doing!
+# "mask" is a 64 bits hexadecimal mask used to check service distance.
+# It defaults to FFFFFFFFFFFF0000. It can also be specified as "/48".
+#
+# "mask_max_shift" is the maximum number of bits to shift the mask
+# to degrade it when distance requirement are not satisfiable.
+# It defaults to 16.
+#
+
+{% for pool in openio_conscience_pools %}
+[pool:{{ pool.name }}]
+{% set targets = openio_conscience_pools | map(attribute='targets') | list | first %}
+targets={% for target in targets %}{{target.count}},{{target.where}},{{target.type}};{% endfor %}
+
+{% for key, value in pool.iteritems() %}
+{% if key != 'name' and key != 'targets' %}
+{{ key }}={{ value }}
+{% endif %}
+{% endfor %}
+
+{% endfor %}
+
+# Service types declarations
+# ---------------------------
+
+{% for service, values in openio_conscience_services.iteritems()%}
+[type:{{service}}]
+score_expr={{values.score_expr}}
+score_timeout={{values.score_timeout}}
+{% if values.score_lock_at_first_register is defined %}
+lock_at_first_register={{values.score_lock_at_first_register}}
+{% endif %}
+
+{% endfor %}

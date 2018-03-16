@@ -1,44 +1,10 @@
+[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-conscience.svg?branch=master)](https://travis-ci.org/open-io/ansible-role-openio-conscience)
+# Ansible role `conscience`
 
-> **Remove this part after a clone**
+An Ansible role for conscience. Specifically, the responsibilities of this role are to:
 
-```sh
-git clone git@github.com:open-io/ansible-role-openio-skeleton.git ROLENAME
-cd ROLENAME
-grep -r -E '\b[A-Z]+\b' --exclude=LICENSE *
-git remote -v
-git remote set-url origin git@github.com:open-io/ansible-role-openio-ROLENAME.git
-find $PWD -type f -print0 | xargs -0 sed -i -e 's@ROLENAME@trueName@g'
-vi meta/main.yml # change purpose and tags
-vi README.md 
-git worktree add docker-tests origin/docker-tests
-```
-
-You have to :
-  - Change the author
-  - Choose one or many maintainers
-  - Change the purpose
-  - Change the rolename
-  - Inform the responsibilities of this role (README)
-  - Feed the `Role Variables` table (README)
-  - Add one or more examples of playbook (README)
-  - Schedule tests with in Travis CI
-  - Write functional tests in the branch `docker-tests`
-
-
-#### `Role Variables` table
-```sh
-for i in $(grep -E "^openio_" defaults/main.yml |cut -d':' -f1| sort); do echo '|' '`'$i'`'' | `'$(grep $i defaults/main.yml|cut -d: -f2|sed -e "s/^ //")'` | ... |'; done
-```
-
------REMOVE--THE---8<-----PREVIOUS---PART------
-
-__
-[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-ROLENAME.svg?branch=master)](https://travis-ci.org/open-io/ansible-role-openio-ROLENAME)
-# Ansible role `ROLENAME`
-
-An Ansible role for PURPOSE. Specifically, the responsibilities of this role are to:
-
--
+- Install a namespace's conscience
+- Configure a namespace's conscience
 
 ## Requirements
 
@@ -49,7 +15,7 @@ An Ansible role for PURPOSE. Specifically, the responsibilities of this role are
 
 | Variable   | Default | Comments (type)  |
 | :---       | :---    | :---             |
-| `openio_ROLENAME_...` | `...`   | ...              |
+| `openio_conscience_...` | `...`   | ...              |
 
 ## Dependencies
 
@@ -62,7 +28,7 @@ No dependencies.
   gather_facts: true
   become: true
   roles:
-    - role: ROLENAME
+    - role: conscience
 ```
 
 
@@ -86,7 +52,3 @@ Apache License, Version 2.0
 ## Contributors
 
 - [Cedric DELGEHIER](https://github.com/cdelgehier) (maintainer)
-- [Romain ACCIARI](https://github.com/racciari) (maintainer)
-- [Vincent LEGOLL](https://github.com/vincent-legoll) (maintainer)
-- [Sebastien LAPIERRE](https://github.com/sebastienlapierre) (maintainer)
-- [Geoffrey TIEN](https://github.com/GeoffreyTien) (maintainer)

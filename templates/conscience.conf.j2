@@ -1,0 +1,47 @@
+# {{ ansible_managed }}
+[General]
+### Now is 'daemon' ignored (this is managed at the CLI)
+### Now is 'pidfile' ingnored (managed at CLI too)
+# Timeout on read operations
+to_op={{ openio_conscience_timeout_read_operations }}
+# Timeout on accepting connections
+to_cnx={{ openio_conscience_timeout_accepting_connection }}
+
+flag.NOLINGER=true
+flag.SHUTDOWN=false
+flag.KEEPALIVE=false
+flag.QUICKACK=false
+
+[Server.conscience]
+min_workers={{  openio_conscience_server.workers_min }}
+min_spare_workers={{  openio_conscience_server.workers_spare_min }}
+max_spare_workers={{  openio_conscience_server.workers_spare_max }}
+max_workers={{  openio_conscience_server.workers_max }}
+listen={{ openio_conscience_bind_address }}:{{ openio_conscience_bind_port }}
+plugins={{  openio_conscience_server.plugins }}
+
+[Service]
+namespace={{ openio_conscience_namespace }}
+type=conscience
+register=false
+load_ns_info=false
+
+{% for plugin in openio_conscience_plugins %}
+[Plugin.{{ plugin.name }}]
+{% for key, value in plugin.iteritems() %}
+{% if key != 'name' %}{{ key }}={{ value }}{% endif %}
+
+{% endfor %}
+{% endfor %}
+
+{% if openio_conscience_multiple %}
+# Multi-conscience
+param_hub.me=tcp://{{ openio_conscience_multiple.me }}
+param_hub.group={{ openio_conscience_multiple.group | map('regex_replace', '(.*)', 'tcp://\\1') | list | join(',') }}
+{% endif %}
+
+# Storage policies definitions
+param_storage_conf={{ openio_conscience_storage_policies_definition_file }}
+
+# Service scoring and pools definitions
+param_service_conf={{ openio_conscience_services_file }}

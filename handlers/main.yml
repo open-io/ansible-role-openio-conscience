@@ -1,8 +1,8 @@
-# roles/ROLENAME/handlers/main.yml
+# roles/conscience/handlers/main.yml
 ---
-- name: restart ROLENAME
+- name: restart conscience
   service:
-    name: "{{ ROLENAME_service }}"
+    name: "{{ conscience_service }}"
     state: restarted
 
 ...
