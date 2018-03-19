@@ -34,9 +34,6 @@ openio_conscience_plugins:
 
 openio_conscience_multiple: {}
 
-openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
-openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
-
 openio_conscience_pools: []
 
 openio_conscience_storage_policies_custom: {}
