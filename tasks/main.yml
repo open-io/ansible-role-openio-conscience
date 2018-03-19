@@ -51,4 +51,5 @@
     - { src: "services.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf" }
     - { src: "storage.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf" }
 
+  notify: "restart {{openio_conscience_namespace}}-conscience-{{openio_conscience_serviceid}}"
 ...

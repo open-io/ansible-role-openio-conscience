@@ -3,5 +3,9 @@
 ---
 conscience_packages:
   - openio-sds-common
+  - openio-sds-server
+  - openio-sds-logrotate
+  - openio-sds-rsyslog
 
+openio_conscience_libdir: /usr/lib64
 ...

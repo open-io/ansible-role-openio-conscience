@@ -1,8 +1,5 @@
 # roles/conscience/handlers/main.yml
 ---
-- name: restart conscience
-  service:
-    name: "{{ conscience_service }}"
-    state: restarted
-
+- name: "restart {{openio_conscience_namespace}}-conscience-{{openio_conscience_serviceid}}"
+  command: "gridinit_cmd restart {{openio_conscience_namespace}}-conscience-{{openio_conscience_serviceid}}"
 ...

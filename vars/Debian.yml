@@ -2,7 +2,9 @@
 # Distribution-specific variables for Ubuntu, Debian, ...
 ---
 conscience_packages:
-  - conscience
+  - openio-sds-logrotate
+  - openio-sds-rsyslog
+  - openio-sds
 
-conscience_service: conscienced
+openio_conscience_libdir: /usr/lib
 ...

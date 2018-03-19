@@ -13,15 +13,12 @@ openio_conscience_timeout_accepting_connection: 1000
 openio_conscience_worm: false
 openio_conscience_auto_container: false
 
-openio_conscience_libdir: /usr/lib
-openio_conscience_sysconfig_dir: /etc/oio/sds
-
 openio_conscience_server:
   workers_min: 2
   workers_max: 10
   workers_spare_min: 2
   workers_spare_max: 10
-  listening_address:  "{{ openio_conscience_bind_address }}:{{ openio_conscience_bind_port }}"
+  listening_address: "{{ openio_conscience_bind_address }}:{{ openio_conscience_bind_port }}"
   plugins: "{{ openio_conscience_plugins | map(attribute='name') | join(',')}}"
 
 openio_conscience_plugins:
@@ -36,25 +33,11 @@ openio_conscience_plugins:
     param_namespace: "{{ openio_conscience_namespace }}"
 
 openio_conscience_multiple: {}
-# openio_conscience_multiple:
-#  me: "{{ openio_conscience_bind_address }}:18000"
-#  group:
-#    - 172.17.0.2:18000
-#    - 172.17.0.3:18000
 
-openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
-openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}-service*.conf"
+openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
+openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
 
 openio_conscience_pools: []
-#  - name: rawx21
-#    targets:
-#      - where: rawx-europe
-#        type: rawx
-#        count: 3
-#      - where: rawx-asia
-#        type: rawx
-#        count: 1
-#    min_dist: 2
 
 openio_conscience_storage_policies_custom: {}
 
@@ -88,5 +71,4 @@ openio_conscience_services:
   account:
     score_expr: "(num tag.up) * ((num stat.cpu)+1)"
     score_timeout: 120
-
 ...
