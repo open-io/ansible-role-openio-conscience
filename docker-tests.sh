@@ -43,7 +43,7 @@ main() {
 
   start_container
 
-  #run_galaxy_install
+  run_galaxy_install
   run_syntax_check
   run_test_playbook
   run_idempotence_test
