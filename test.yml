@@ -32,10 +32,10 @@
               type: rawx
               count: 1
           min_dist: 2
-      
+
       openio_conscience_multiple:
         me: "{{ openio_conscience_bind_address }}:18000"
         group:
           - 172.17.0.3:18000
           - 172.17.0.4:18000
-
+...
