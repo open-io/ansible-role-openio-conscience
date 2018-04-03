@@ -1,19 +1,19 @@
 ---
 galaxy_info:
   author: Cedric DELGEHIER <cedric@openio.io>
-  description:  Install and configure an openio conscience
-  company: openio.io
+  description: Install and configure an openio conscience
+  company: OpenIO
   license: Apache
 
   min_ansible_version: 2.4
 
   platforms:
-  - name: Ubuntu
-    versions:
-    - xenial
-  - name: EL
-    versions:
-    - 7
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: EL
+      versions:
+        - 7
 
   galaxy_tags:
     - system
@@ -27,6 +27,7 @@ galaxy_info:
     # alphanumeric characters. Maximum 20 tags per role.
 
 dependencies: []
-  # List your role dependencies here, one per line.
-  # Be sure to remove the '[]' above if you add dependencies
-  # to this list.
+# List your role dependencies here, one per line.
+# Be sure to remove the '[]' above if you add dependencies
+# to this list.
+...

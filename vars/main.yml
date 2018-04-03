@@ -18,7 +18,7 @@ data_security:
   ECLIBEC144D1: "ec/k=14,m=4,algo=liberasurecode_rs_vand,distance=1"
   ECISAL63D1: "ec/k=6,m=3,algo=isa_l_rs_vand,distance=1"
   ECISAL123D1: "ec/k=12,m=3,algo=isa_l_rs_vand,distance=1"
-  ECISAL144D1: "ec/k=14,m=4,algo=isa_l_rs_vand,distance=1" 
+  ECISAL144D1: "ec/k=14,m=4,algo=isa_l_rs_vand,distance=1"
 
 openio_conscience_sysconfig_dir: /etc/oio/sds
 openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
