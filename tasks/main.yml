@@ -28,6 +28,12 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
+- name: Ensures conf directory exists
+  file:
+    dest: "/etc/gridinit.d/{{ openio_conscience_namespace }}"
+    state: directory
+  tags: install
+
 - name: Ensure directory exists
   file:
     path: "{{ item }}"
@@ -36,7 +42,7 @@
     group: openio
     mode: 0755
   with_items:
-    - "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}"
+    - "{{ openio_conscience_sysconfig_dir }}/conscience-{{ openio_conscience_serviceid }}"
   tags: install
 
 - name: Generate configuration files
@@ -47,9 +53,24 @@
     group: openio
     mode: 0644
   with_items:
-    - { src: "conscience.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}.conf" }
-    - { src: "services.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf" }
-    - { src: "storage.conf.j2", dest: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf" }
+    - src: "conscience.conf.j2"
+      dest: "{{ openio_conscience_sysconfig_dir }}/\
+        conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}.conf"
+    - src: "services.conf.j2"
+      dest: "{{ openio_conscience_sysconfig_dir }}/\
+        conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
+    - src: "storage.conf.j2"
+      dest: "{{ openio_conscience_sysconfig_dir }}/\
+        conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
+    - src: "gridinit_conscience.conf.j2"
+      dest: "{{ openio_conscience_gridinit_dir }}/conscience-{{ openio_conscience_serviceid }}.conf"
+  register: _conscience_conf
 
-  notify: "restart {{openio_conscience_namespace}}-conscience-{{openio_conscience_serviceid}}"
+- name: restart conscience
+  shell: |
+    gridinit_cmd reload
+    gridinit_cmd restart  {{openio_conscience_namespace}}-conscience-{{openio_conscience_serviceid}}
+  when: _conscience_conf.changed
+  tags: configure
+
 ...
