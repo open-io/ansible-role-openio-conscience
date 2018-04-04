@@ -4,24 +4,12 @@
   vars:
     NS: TRAVIS
   roles:
-    - role: "repo-openio"
-
+    - role: repository
     - role: gridinit
-      openio_gridinit_services:
-        - name: conscience-0
-          namespace: "{{ NS }}"
-          type: conscience
-          configuration:
-            command: "/usr/bin/oio-daemon -s {{ NS }},conscience,0 /etc/oio/sds/{{ NS }}/conscience-0/conscience-0.conf"
-            enabled: true
-            start_at_boot: true
-            on_die: respawn
-            uid: openio
-            gid: openio
-            env_PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-
+      openio_gridinit_namespace: "{{ NS }}"
     - role: role_under_test
       openio_conscience_namespace: "{{ NS }}"
+      openio_conscience_bind_address: "{{ ansible_default_ipv4.address }}"
       openio_conscience_pools:
         - name: rawx21
           targets:
@@ -32,7 +20,6 @@
               type: rawx
               count: 1
           min_dist: 2
-
       openio_conscience_multiple:
         me: "{{ openio_conscience_bind_address }}:18000"
         group:
