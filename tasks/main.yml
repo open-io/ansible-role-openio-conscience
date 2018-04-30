@@ -28,21 +28,25 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
-- name: Ensures conf directory exists
-  file:
-    dest: "/etc/gridinit.d/{{ openio_conscience_namespace }}"
-    state: directory
-  tags: install
-
-- name: Ensure directory exists
-  file:
+- name: Test directories presence
+  stat:
     path: "{{ item }}"
+  register: _dir
+  with_items:
+    - "/etc/gridinit.d/{{ openio_conscience_namespace }}"
+    - "{{ openio_conscience_sysconfig_dir }}/conscience-{{ openio_conscience_serviceid }}"
+    - "/var/log/oio/sds/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}"
+
+- name: Ensure directories exists
+  file:
+    path: "{{ item.item }}"
     state: directory
     owner: openio
     group: openio
     mode: 0755
-  with_items:
-    - "{{ openio_conscience_sysconfig_dir }}/conscience-{{ openio_conscience_serviceid }}"
+    recurse: true
+  with_items: "{{ _dir.results }}"
+  when: not item.stat.exists
   tags: install
 
 - name: Generate configuration files
