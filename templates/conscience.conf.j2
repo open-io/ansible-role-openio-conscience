@@ -39,9 +39,3 @@ load_ns_info=false
 param_hub.me=tcp://{{ openio_conscience_multiple.me }}
 param_hub.group={{ openio_conscience_multiple.group | map('regex_replace', '(.*)', 'tcp://\\1') | list | join(',') }}
 {% endif %}
-
-# Storage policies definitions
-param_storage_conf={{ openio_conscience_storage_policies_definition_file }}
-
-# Service scoring and pools definitions
-param_service_conf={{ openio_conscience_services_file }}

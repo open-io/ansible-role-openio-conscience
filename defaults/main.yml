@@ -25,6 +25,8 @@ openio_conscience_plugins:
   - name: conscience
     path: "{{ openio_conscience_libdir }}/grid/msg_conscience.so"
     param_namespace: "{{ openio_conscience_namespace }}"
+    param_storage_conf: "{{ openio_conscience_storage_policies_definition_file }}"
+    param_service_conf: "{{ openio_conscience_services_file }}"
   - name: stats
     path: "{{ openio_conscience_libdir }}/grid/msg_stats.so"
   - name: ping
