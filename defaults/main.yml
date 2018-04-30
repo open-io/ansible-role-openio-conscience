@@ -22,15 +22,15 @@ openio_conscience_server:
   plugins: "{{ openio_conscience_plugins | map(attribute='name') | join(',')}}"
 
 openio_conscience_plugins:
+  - name: conscience
+    path: "{{ openio_conscience_libdir }}/grid/msg_conscience.so"
+    param_namespace: "{{ openio_conscience_namespace }}"
   - name: stats
     path: "{{ openio_conscience_libdir }}/grid/msg_stats.so"
   - name: ping
     path: "{{ openio_conscience_libdir }}/grid/msg_ping.so"
   - name: fallback
     path: "{{ openio_conscience_libdir }}/grid/msg_fallback.so"
-  - name: conscience
-    path: "{{ openio_conscience_libdir }}/grid/msg_conscience.so"
-    param_namespace: "{{ openio_conscience_namespace }}"
 
 openio_conscience_multiple: {}
 
