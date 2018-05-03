@@ -35,7 +35,6 @@
   with_items:
     - "/etc/gridinit.d/{{ openio_conscience_namespace }}"
     - "{{ openio_conscience_sysconfig_dir }}/conscience-{{ openio_conscience_serviceid }}"
-    - "/var/log/oio/sds/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}"
 
 - name: Ensure directories exists
   file:
