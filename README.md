@@ -15,14 +15,11 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 
 | Variable   | Default | Comments (type)  |
 | :---       | :---    | :---             |
-| `openio_conscience_auto_container` | `false` | ... |
 | `openio_conscience_bind_address` | `"{{ ansible_default_ipv4.address }}"` | ... |
 | `openio_conscience_bind_port` | `6000` | ... |
-| `openio_conscience_chunk_size` | `10485760` | ... |
 | `openio_conscience_data_security_custom` | `{}` | ... |
 | `openio_conscience_multiple` | `{}` | ... |
 | `openio_conscience_namespace` | `"OPENIO"` | ... |
-| `openio_conscience_namespace_status` | `"standalone"` | ... |
 | `openio_conscience_plugins` | `` | ... |
 | `openio_conscience_pools` | `[]` | ... |
 | `openio_conscience_server` | `` | ... |
@@ -31,7 +28,6 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 | `openio_conscience_storage_policies_custom` | `{}` | ... |
 | `openio_conscience_timeout_accepting_connection` | `1000` | ... |
 | `openio_conscience_timeout_read_operations` | `1000` | ... |
-| `openio_conscience_worm` | `false` | ... |
 
 ## Dependencies
 

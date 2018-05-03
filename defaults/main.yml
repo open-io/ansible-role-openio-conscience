@@ -3,15 +3,10 @@
 openio_conscience_namespace: "OPENIO"
 openio_conscience_serviceid: "0"
 
-openio_conscience_namespace_status: "standalone"
 openio_conscience_bind_address: "{{ ansible_default_ipv4.address }}"
 openio_conscience_bind_port: 6000
-openio_conscience_chunk_size: 10485760
 openio_conscience_timeout_read_operations: 1000
 openio_conscience_timeout_accepting_connection: 1000
-
-openio_conscience_worm: false
-openio_conscience_auto_container: false
 
 openio_conscience_server:
   workers_min: 2
