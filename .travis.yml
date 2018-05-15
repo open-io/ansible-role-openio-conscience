@@ -2,7 +2,7 @@
 ---
 sudo: required
 
-env:   
+env:
   global:
     - ANSIBLE_VERSION=2.5
   matrix:
