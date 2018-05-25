@@ -29,8 +29,8 @@
     - role: repository
     - role: gridinit
       openio_gridinit_namespace: "{{ NS }}"
-    - role: meta0
-      openio_meta0_namespace: "{{ NS }}"
+    - role: meta
+      openio_meta_namespace: "{{ NS }}"
     - role: conscienceagent
       openio_conscienceagent_namespace: "{{ NS }}"
     - role: oioproxy

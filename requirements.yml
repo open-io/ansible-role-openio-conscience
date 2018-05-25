@@ -7,9 +7,9 @@
   version: master
   name: gridinit
 
-- src: https://github.com/open-io/ansible-role-openio-meta0.git
+- src: https://github.com/open-io/ansible-role-openio-meta.git
   version: master
-  name: meta0
+  name: meta
 
 - src: https://github.com/open-io/ansible-role-openio-conscienceagent.git
   version: master
