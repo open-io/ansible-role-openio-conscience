@@ -38,6 +38,14 @@
   [[ "${output}" =~ "param_hub.me=tcp://172.17.0.2:18000" ]] && [[ "${output}" =~ "param_hub.group=tcp://172.17.0.3:18000,tcp://172.17.0.4:18000" ]]
 } 
 
+@test 'Request throught oioproxy' {
+  run bash -c "curl -s http://172.17.0.2:6006/v3.0/TRAVIS/conscience/list?type=meta0"
+  echo "output: "$output
+  echo "status: "$status
+  [[ "${status}" -eq "0" ]]
+  [[ "${output}" =~ "\/var\/lib\/oio\/sds\/TRAVIS\/meta0-0" ]]
+}
+
 @test 'Conscience pool' {  
   run bash -c "docker exec -ti ${SUT_ID} cat /etc/oio/sds/TRAVIS/conscience-0/conscience-0-services.conf"  
   echo "output: "$output  
