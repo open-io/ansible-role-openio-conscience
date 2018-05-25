@@ -15,7 +15,8 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 
 | Variable   | Default | Comments (type)  |
 | :---       | :---    | :---             |
-| `openio_conscience_bind_address` | `"{{ ansible_default_ipv4.address }}"` | ... |
+| `openio_conscience_bind_interface` | `"{{ ansible_default_ipv4.alias }}"` | ... |
+| `openio_conscience_bind_address` | `"{{ hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address'] }}"` | ... |
 | `openio_conscience_bind_port` | `6000` | ... |
 | `openio_conscience_data_security_custom` | `{}` | ... |
 | `openio_conscience_multiple` | `{}` | ... |

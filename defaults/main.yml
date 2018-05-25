@@ -3,7 +3,9 @@
 openio_conscience_namespace: "OPENIO"
 openio_conscience_serviceid: "0"
 
-openio_conscience_bind_address: "{{ ansible_default_ipv4.address }}"
+openio_conscience_bind_interface: "{{ ansible_default_ipv4.alias }}"
+openio_conscience_bind_address:
+  "{{ hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address'] }}"
 openio_conscience_bind_port: 6000
 openio_conscience_timeout_read_operations: 1000
 openio_conscience_timeout_accepting_connection: 1000
