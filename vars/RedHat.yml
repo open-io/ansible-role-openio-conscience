@@ -2,10 +2,7 @@
 # Distribution-specific variables for RHEL, CentOS, ...
 ---
 conscience_packages:
-  - openio-sds-common
-  - openio-sds-server
-  - openio-sds-logrotate
-  - openio-sds-rsyslog
+  - "openio-sds-server-{{ openio_meta_version }}"
 
 openio_conscience_libdir: /usr/lib64
 ...
