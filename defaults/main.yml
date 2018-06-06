@@ -3,7 +3,7 @@
 openio_conscience_namespace: "OPENIO"
 openio_conscience_serviceid: "0"
 
-openio_conscience_version: '*'
+openio_conscience_version: 'latest'
 
 openio_conscience_bind_interface: "{{ ansible_default_ipv4.alias }}"
 openio_conscience_bind_address:

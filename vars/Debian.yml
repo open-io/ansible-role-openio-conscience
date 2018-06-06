@@ -2,7 +2,7 @@
 # Distribution-specific variables for Ubuntu, Debian, ...
 ---
 conscience_packages:
-  - "openio-sds={{ openio_meta_version }}"
+  - "{{ 'openio-sds' if openio_conscience_version == 'latest' else 'openio-sds=' ~ openio_conscience_version }}"
 
 openio_conscience_libdir: /usr/lib
 ...

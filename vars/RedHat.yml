@@ -2,7 +2,7 @@
 # Distribution-specific variables for RHEL, CentOS, ...
 ---
 conscience_packages:
-  - "openio-sds-server-{{ openio_meta_version }}"
+  - "{{ 'openio-sds-server' if openio_conscience_version == 'latest' else 'openio-sds-server-' ~ openio_conscience_version}}"
 
 openio_conscience_libdir: /usr/lib64
 ...

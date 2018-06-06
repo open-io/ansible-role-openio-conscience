@@ -29,7 +29,7 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 | `openio_conscience_storage_policies_custom` | `{}` | ... |
 | `openio_conscience_timeout_accepting_connection` | `1000` | ... |
 | `openio_conscience_timeout_read_operations` | `1000` | ... |
-| `openio_conscience_version` | `"*"` | Install a specific version |
+| `openio_conscience_version` | `latest` | Install a specific version |
 
 ## Dependencies
 
