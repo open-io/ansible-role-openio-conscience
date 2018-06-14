@@ -28,6 +28,7 @@
   roles:
     - role: repository
     - role: gridinit
+      openio_gridinit_per_ns: true
       openio_gridinit_namespace: "{{ NS }}"
     - role: meta
       openio_meta_namespace: "{{ NS }}"
