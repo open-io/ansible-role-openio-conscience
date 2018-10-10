@@ -18,6 +18,8 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 | `openio_conscience_bind_interface` | `"{{ ansible_default_ipv4.alias }}"` | ... |
 | `openio_conscience_bind_address` | `"{{ hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address'] }}"` | ... |
 | `openio_conscience_bind_port` | `6000` | ... |
+| `openio_conscience_gridinit_dir` | `/etc/gridinit.d/{{ openio_conscience_namespace }}` | Path to copy the gridinit conf |
+| `openio_conscience_gridinit_file_prefix` | `""` | Maybe set it to {{ openio_conscience_namespace }}- for old gridinit's style |
 | `openio_conscience_data_security_custom` | `{}` | ... |
 | `openio_conscience_multiple` | `{}` | ... |
 | `openio_conscience_namespace` | `"OPENIO"` | ... |
