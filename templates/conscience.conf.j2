@@ -13,12 +13,12 @@ flag.KEEPALIVE=false
 flag.QUICKACK=false
 
 [Server.conscience]
-min_workers={{  openio_conscience_server.workers_min }}
-min_spare_workers={{  openio_conscience_server.workers_spare_min }}
-max_spare_workers={{  openio_conscience_server.workers_spare_max }}
-max_workers={{  openio_conscience_server.workers_max }}
+min_workers={{ openio_conscience_server.workers_min }}
+min_spare_workers={{ openio_conscience_server.workers_spare_min }}
+max_spare_workers={{ openio_conscience_server.workers_spare_max }}
+max_workers={{ openio_conscience_server.workers_max }}
 listen={{ openio_conscience_bind_address }}:{{ openio_conscience_bind_port }}
-plugins={{  openio_conscience_server.plugins }}
+plugins={{ openio_conscience_server.plugins }}
 
 [Service]
 namespace={{ openio_conscience_namespace }}
@@ -29,9 +29,12 @@ load_ns_info=false
 {% for plugin in openio_conscience_plugins %}
 [Plugin.{{ plugin.name }}]
 {% for key, value in plugin.iteritems() %}
-{% if key != 'name' %}{{ key }}={{ value }}{% endif %}
-
+{% if key != 'name' %}
+{{ key }}={{ value }}
+{% endif %}
 {% endfor %}
+# end plugin {{ plugin.name }}
+
 {% endfor %}
 
 {% if openio_conscience_multiple %}

@@ -66,9 +66,9 @@ openio_conscience_services:
   redis:
     score_expr: "(num tag.up) * ((num stat.cpu)+1)"
     score_timeout: 120
-  oiofs:
-    score_expr: "((num stat.cpu)+1)"
-    score_timeout: 120
+  # oiofs:
+  #   score_expr: "((num stat.cpu)+1)"
+  #   score_timeout: 120
   account:
     score_expr: "(num tag.up) * ((num stat.cpu)+1)"
     score_timeout: 120

@@ -62,7 +62,7 @@
     - src: "services.conf.j2"
       dest: "{{ openio_conscience_sysconfig_dir }}/\
         conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
-    - src: "storage.conf.j2"
+    - src: "policies.conf.j2"
       dest: "{{ openio_conscience_sysconfig_dir }}/\
         conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
     - src: "gridinit_conscience.conf.j2"
