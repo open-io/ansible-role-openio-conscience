@@ -6,4 +6,6 @@
   with_items: "{{ conscience_packages }}"
   loop_control:
     loop_var: pkg
+  ignore_errors: "{{ ansible_check_mode }}"
+
 ...
