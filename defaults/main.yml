@@ -5,6 +5,8 @@ openio_conscience_serviceid: "0"
 
 openio_conscience_version: 'latest'
 
+openio_conscience_provision_only: false
+
 openio_conscience_bind_interface: "{{ ansible_default_ipv4.alias }}"
 openio_conscience_bind_address:
   "{{ hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address'] }}"
