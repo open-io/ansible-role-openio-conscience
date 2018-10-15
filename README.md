@@ -32,6 +32,7 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 | `openio_conscience_timeout_accepting_connection` | `1000` | ... |
 | `openio_conscience_timeout_read_operations` | `1000` | ... |
 | `openio_conscience_version` | `latest` | Install a specific version |
+| `openio_conscience_provision_only` | `false` | Provision only, without restarting the services |
 
 ## Dependencies
 
@@ -56,7 +57,7 @@ No dependencies.
               type: rawx
               count: 1
           min_dist: 2
-      
+
       openio_conscience_multiple:
         me: "{{ openio_conscience_bind_address }}:18000"
         group:
