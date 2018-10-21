@@ -48,6 +48,16 @@
   when: not item.stat.exists
   tags: install
 
+- name: Ensure log directory
+  file:
+    path: "/var/log/oio/sds/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}"
+    state: directory
+    owner: "{{ syslog_user }}"
+    group: openio
+    mode: 0750
+    recurse: true
+  tags: install
+
 - name: Generate configuration files
   template:
     src: "{{ item.src }}"

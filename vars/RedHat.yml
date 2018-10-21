@@ -6,4 +6,6 @@ conscience_packages:
     if openio_conscience_version == 'latest' else 'openio-sds-server-' ~ openio_conscience_version}}"
 
 openio_conscience_libdir: /usr/lib64
+
+syslog_user: openio
 ...
