@@ -30,7 +30,7 @@ data_security:
 
 
 openio_conscience_sysconfig_dir: "/etc/oio/sds/{{ openio_conscience_namespace }}"
-#openio_conscience_gridinit_dir: "/etc/gridinit.d/{{ openio_conscience_namespace }}"
+openio_conscience_servicename: "conscience-{{ openio_conscience_serviceid }}"
 openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/\
   conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
 openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/\
