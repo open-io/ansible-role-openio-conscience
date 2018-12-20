@@ -44,7 +44,21 @@ No dependencies.
 - hosts: all
   gather_facts: true
   become: true
+  vars:
+    NS: OPENIO
   roles:
+    - role: repository
+    - role: users
+    - role: namespace
+      openio_namespace_name: "{{ NS }}"
+    - role: gridinit
+      openio_gridinit_namespace: "{{ NS }}"
+    - role: meta
+      openio_meta_namespace: "{{ NS }}"
+    - role: conscienceagent
+      openio_conscienceagent_namespace: "{{ NS }}"
+    - role: oioproxy
+      openio_oioproxy_namespace: "{{ NS }}"
     - role: conscience
       openio_conscience_namespace: "{{ NS }}"
       openio_conscience_pools:
