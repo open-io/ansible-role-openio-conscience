@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
-[Service.{{ openio_conscience_namespace }}-conscience-{{ openio_conscience_serviceid }}]
-command=/usr/bin/oio-daemon -s OIO,{{ openio_conscience_namespace }},conscience,{{ openio_conscience_serviceid }} /etc/oio/sds/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}.conf
+[Service.{{ openio_conscience_namespace }}-{{ openio_conscience_servicename }}]
+command=/usr/bin/oio-daemon -s OIO,{{ openio_conscience_namespace }},conscience,{{ openio_conscience_serviceid }} /etc/oio/sds/{{ openio_conscience_namespace }}/{{ openio_conscience_servicename }}/{{ openio_conscience_servicename }}.conf
 enabled=true
 start_at_boot=true
 on_die=respawn

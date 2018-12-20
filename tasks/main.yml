@@ -7,20 +7,6 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
-- name: Create the 'openio' group
-  group:
-    name: openio
-    gid: "{{ openio_group_openio_gid | default('220')}}"
-  tags: install
-
-- name: Create the 'openio' user
-  user:
-    name: openio
-    comment: "openio account"
-    uid: "{{ openio_user_openio_uid | default('120')}}"
-    group: openio
-  tags: install
-
 - name: "Include {{ ansible_distribution }} tasks"
   include_tasks: "{{ item }}"
   with_first_found:
@@ -28,34 +14,19 @@
     - "{{ ansible_os_family }}.yml"
   tags: install
 
-- name: Test directories presence
-  stat:
-    path: "{{ item }}"
-  register: _dir
-  with_items:
-    - "/etc/gridinit.d/{{ openio_conscience_namespace }}"
-    - "{{ openio_conscience_sysconfig_dir }}/conscience-{{ openio_conscience_serviceid }}"
-
 - name: Ensure directories exists
   file:
-    path: "{{ item.item }}"
+    path: "{{ item.path }}"
     state: directory
-    owner: openio
-    group: openio
-    mode: 0755
-    recurse: true
-  with_items: "{{ _dir.results }}"
-  when: not item.stat.exists
-  tags: install
-
-- name: Ensure log directory
-  file:
-    path: "/var/log/oio/sds/{{ openio_conscience_namespace }}/conscience-{{ openio_conscience_serviceid }}"
-    state: directory
-    owner: "{{ syslog_user }}"
-    group: openio
-    mode: 0750
-    recurse: true
+    owner: "{{ item.owner | default('openio') }}"
+    group: "{{ item.group | default('openio') }}"
+    mode: "{{ item.mode | default(0755) }}"
+  with_items:
+    - path: "/etc/gridinit.d/{{ openio_conscience_namespace }}"
+    - path: "{{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_servicename }}"
+    - path: "/var/log/oio/sds/{{ openio_conscience_namespace }}/{{ openio_conscience_servicename }}"
+      owner: "{{ syslog_user }}"
+      mode: "0750"
   tags: install
 
 - name: Generate configuration files
@@ -68,22 +39,22 @@
   with_items:
     - src: "conscience.conf.j2"
       dest: "{{ openio_conscience_sysconfig_dir }}/\
-        conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}.conf"
+        {{ openio_conscience_servicename }}/{{ openio_conscience_servicename }}.conf"
     - src: "services.conf.j2"
       dest: "{{ openio_conscience_sysconfig_dir }}/\
-        conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
+        {{ openio_conscience_servicename }}/{{ openio_conscience_servicename }}-services.conf"
     - src: "policies.conf.j2"
       dest: "{{ openio_conscience_sysconfig_dir }}/\
-        conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
+        {{ openio_conscience_servicename }}/{{ openio_conscience_servicename }}-policies.conf"
     - src: "gridinit_conscience.conf.j2"
       dest: "{{ openio_conscience_gridinit_dir }}/{{ openio_conscience_gridinit_file_prefix }}\
-        conscience-{{ openio_conscience_serviceid }}.conf"
+        {{ openio_conscience_servicename }}.conf"
   register: _conscience_conf
 
 - name: restart conscience
   shell: |
     gridinit_cmd reload
-    gridinit_cmd restart  {{openio_conscience_namespace}}-conscience-{{openio_conscience_serviceid}}
+    gridinit_cmd restart {{ openio_conscience_namespace }}-{{ openio_conscience_servicename }}
   when:
     - _conscience_conf.changed
     - not openio_conscience_provision_only
