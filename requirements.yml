@@ -7,6 +7,14 @@
   version: master
   name: gridinit
 
+- src: https://github.com/open-io/ansible-role-openio-namespace.git
+  version: master
+  name: namespace
+
+- src: https://github.com/open-io/ansible-role-openio-users.git
+  version: master
+  name: users
+
 - src: https://github.com/open-io/ansible-role-openio-meta.git
   version: master
   name: meta
