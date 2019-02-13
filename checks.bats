@@ -51,5 +51,5 @@
   echo "output: "$output  
   echo "status: "$status  
   [[ "${status}" -eq "0" ]]  
-  [[ "${output}" =~ "pool:rawx21" ]] && [[ "${output}" =~ 'targets=2,rawx-europe,rawx;1,rawx-asia,rawx;' ]] && [[ "${output}" =~ "min_dist=2" ]]
+  [[ "${output}" =~ "pool:rawx21" ]] && [[ "${output}" =~ 'targets=2,rawx-europe,rawx;1,rawx-asia,rawx' ]] && [[ "${output}" =~ "min_dist=2" ]]
 }  
