@@ -29,10 +29,10 @@
 # "warn_dist" is the distance between services at which the pool will emit
 # a warning, for further improvement.
 
+
 {% for pool in openio_conscience_pools %}
 [pool:{{ pool.name }}]
-{% set targets = openio_conscience_pools | map(attribute='targets') | list | first %}
-targets={% for target in targets %}{{target.count}},{{target.where}},{{target.type}};{% endfor %}
+targets={% for target in pool.targets %}{{target.count}},{{target.slot}},{{target.fallback}}{% if not loop.last %};{% endif %}{% endfor %}
 
 {% for key, value in pool.iteritems() %}
 {% if key != 'name' and key != 'targets' %}
