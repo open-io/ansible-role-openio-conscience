@@ -28,11 +28,11 @@
       openio_conscience_pools:
         - name: rawx21
           targets:
-            - where: rawx-europe
-              type: rawx
+            - slot: rawx-europe
+              fallback: rawx
               count: 2
-            - where: rawx-asia
-              type: rawx
+            - slot: rawx-asia
+              fallback: rawx
               count: 1
           min_dist: 2
       openio_conscience_multiple:
