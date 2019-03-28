@@ -1,15 +1,15 @@
 # roles/conscience/defaults/main.yml
 ---
-openio_conscience_namespace: "OPENIO"
-openio_conscience_serviceid: "0"
+openio_conscience_namespace: "{{ namespace | default('OPENIO') }}"
+openio_conscience_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
 
 openio_conscience_version: 'latest'
 
 openio_conscience_provision_only: false
 
 openio_conscience_bind_interface: "{{ ansible_default_ipv4.alias }}"
-openio_conscience_bind_address:
-  "{{ hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address'] }}"
+openio_conscience_bind_address: "{{ openio_bind_address \
+  | default(hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address']) }}" 
 openio_conscience_bind_port: 6000
 openio_conscience_gridinit_dir: "/etc/gridinit.d/{{ openio_conscience_namespace }}"
 openio_conscience_gridinit_file_prefix: ""
@@ -68,9 +68,6 @@ openio_conscience_services:
   redis:
     score_expr: "(num tag.up) * ((num stat.cpu)+1)"
     score_timeout: 120
-  # oiofs:
-  #   score_expr: "((num stat.cpu)+1)"
-  #   score_timeout: 120
   account:
     score_expr: "(num tag.up) * ((num stat.cpu)+1)"
     score_timeout: 120

@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: true
+  vars:
+    NS: TRAVIS
+  roles:
+    - role: repository
+      openio_repository_openstack_release: 'queens'
+      openio_repository_no_log: false
+      openio_repository_products:
+        sds:
+          release: "18.10"
+    - role: users
+    - role: namespace
+      openio_namespace_name: "{{ NS }}"
+    - role: gridinit
+      openio_gridinit_per_ns: true
+      openio_gridinit_namespace: "{{ NS }}"
+    - role: meta
+      openio_meta_namespace: "{{ NS }}"
+    - role: conscienceagent
+      openio_conscienceagent_namespace: "{{ NS }}"
+    - role: oioproxy
+      openio_oioproxy_namespace: "{{ NS }}"
+    - role: role_under_test
+      openio_conscience_namespace: "{{ NS }}"
+      openio_conscience_bind_address: "{{ ansible_default_ipv4.address }}"
+      openio_conscience_pools:
+        - name: rawx21
+          targets:
+            - slot: rawx-europe
+              fallback: rawx
+              count: 2
+            - slot: rawx-asia
+              fallback: rawx
+              count: 1
+          min_dist: 2
+      openio_conscience_multiple:
+        me: "{{ openio_conscience_bind_address }}:18000"
+        group:
+          - 172.17.0.3:18000
+          - 172.17.0.4:18000
+
+...
