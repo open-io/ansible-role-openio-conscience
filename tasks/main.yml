@@ -51,13 +51,35 @@
         {{ openio_conscience_servicename }}.conf"
   register: _conscience_conf
 
-- name: restart conscience
+- name: "restart conscience to apply the new configuration"
   shell: |
     gridinit_cmd reload
     gridinit_cmd restart {{ openio_conscience_namespace }}-{{ openio_conscience_servicename }}
+  register: _restart_conscience
   when:
-    - _conscience_conf.changed
+    - _conscience_conf is changed
     - not openio_conscience_provision_only
   tags: configure
 
+- block:
+    - name: "Ensure conscience is started"
+      command: gridinit_cmd start {{ openio_conscience_namespace }}-{{ openio_conscience_servicename }}
+      register: _start_conscience
+      changed_when: '"Success" in _start_conscience.stdout'
+      when:
+        - not openio_conscience_provision_only
+        - _restart_conscience is skipped
+      tags: configure
+
+    - name: check conscience
+      command: "oio-tool ping {{ openio_conscience_bind_address }}:{{ openio_conscience_bind_port }}"
+      register: _conscience_check
+      retries: 3
+      delay: 5
+      until: _conscience_check is success
+      changed_when: false
+      failed_when:
+        - _conscience_check.rc != 0
+        - "'PING OK' not in _conscience_check.stdout"
+  when: openio_bootstrap | d(false)
 ...
