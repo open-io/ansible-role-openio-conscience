@@ -79,4 +79,6 @@ openio_conscience_services:
     score_expr: "(num stat.cpu)"
     score_timeout: 120
     score_lock_at_first_register: false
+
+openio_conscience_persistence_period: 30
 ...

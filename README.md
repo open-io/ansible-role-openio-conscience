@@ -23,6 +23,7 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 | `openio_conscience_data_security_custom` | `{}` | Dict of customized data security |
 | `openio_conscience_multiple` | `{}` |  Dict of multiple consciences |
 | `openio_conscience_namespace` | `"OPENIO"` | Namespace |
+| `openio_conscience_persistence_period` | `30` | Time in second for score persistence |
 | `openio_conscience_plugins` | `` | Conscience plugins |
 | `openio_conscience_pools` | `[]` | Conscience pools |
 | `openio_conscience_server` | `` | Conscience configuration |
