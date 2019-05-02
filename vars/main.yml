@@ -35,4 +35,6 @@ openio_conscience_storage_policies_definition_file: "{{ openio_conscience_syscon
   conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
 openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/\
   conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
+openio_conscience_persistence_file: "{{ openio_conscience_sysconfig_dir }}/\
+  conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-persistence.dat"
 ...
