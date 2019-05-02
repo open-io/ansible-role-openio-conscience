@@ -3,6 +3,7 @@
   become: true
   vars:
     NS: TRAVIS
+    openio_bootstrap: true
   roles:
     - role: repository
       openio_repository_no_log: false
