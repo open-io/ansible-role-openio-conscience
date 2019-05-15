@@ -74,10 +74,10 @@ No dependencies.
           min_dist: 2
 
       openio_conscience_multiple:
-        me: "{{ openio_conscience_bind_address }}:18000"
+        me: "{{ openio_conscience_bind_address }}:6600"
         group:
-          - 172.17.0.3:18000
-          - 172.17.0.4:18000
+          - 172.17.0.3:6600
+          - 172.17.0.4:6600
 
 ```
 
