@@ -35,7 +35,7 @@
   echo "output: "$output 
   echo "status: "$status 
   [[ "${status}" -eq "0" ]] 
-  [[ "${output}" =~ "param_hub.me=tcp://172.17.0.2:18000" ]] && [[ "${output}" =~ "param_hub.group=tcp://172.17.0.3:18000,tcp://172.17.0.4:18000" ]]
+  [[ "${output}" =~ "param_hub.me=tcp://172.17.0.2:6600" ]] && [[ "${output}" =~ "param_hub.group=tcp://172.17.0.3:6600,tcp://172.17.0.4:6600" ]]
 } 
 
 @test 'Request throught oioproxy' {

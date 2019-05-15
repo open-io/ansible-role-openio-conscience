@@ -1,5 +1,22 @@
 ---
-- hosts: all
+- name: generate conscience group
+  hosts: all
+  gather_facts: false
+  tasks:
+    - add_host:
+        name: "{{ item.name }}"
+        ansible_host: "{{ item.openio_bind_address }}"
+        openio_bind_address: "{{ item.openio_bind_address }}"
+        groups: conscience
+      with_items:
+        - { name: "localhost", openio_bind_address: "172.17.0.2" }
+        - { name: "node2", openio_bind_address: "172.17.0.3" }
+        - { name: "node3", openio_bind_address: "172.17.0.4" }
+      delegate_to: localhost
+      run_once: true
+      changed_when: false
+
+- hosts: localhost
   become: true
   vars:
     NS: TRAVIS
@@ -33,10 +50,6 @@
               fallback: rawx
               count: 1
           min_dist: 2
-      openio_conscience_multiple:
-        me: "{{ openio_conscience_bind_address }}:18000"
-        group:
-          - 172.17.0.3:18000
-          - 172.17.0.4:18000
+      openio_conscience_multiple_enable: true
 
 ...
