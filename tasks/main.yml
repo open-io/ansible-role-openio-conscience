@@ -5,7 +5,9 @@
   with_first_found:
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
-  tags: install
+  tags:
+    - install
+    - configure
 
 - name: "Include {{ ansible_distribution }} tasks"
   include_tasks: "{{ item }}"
@@ -27,7 +29,7 @@
     - path: "/var/log/oio/sds/{{ openio_conscience_namespace }}/{{ openio_conscience_servicename }}"
       owner: "{{ syslog_user }}"
       mode: "0750"
-  tags: install
+  tags: configure
 
 - name: Generate configuration files
   template:
@@ -50,6 +52,7 @@
       dest: "{{ openio_conscience_gridinit_dir }}/{{ openio_conscience_gridinit_file_prefix }}\
         {{ openio_conscience_servicename }}.conf"
   register: _conscience_conf
+  tags: configure
 
 - name: "restart conscience to apply the new configuration"
   shell: |
@@ -78,6 +81,7 @@
       delay: 5
       until: _conscience_check is success
       changed_when: false
+      tags: configure
       failed_when:
         - _conscience_check.rc != 0
         - "'PING OK' not in _conscience_check.stdout"
