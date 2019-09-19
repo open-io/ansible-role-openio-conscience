@@ -33,8 +33,8 @@ load_ns_info=false
 {{ key }}={{ value }}
 {% endif %}
 {% endfor %}
-{% if openio_conscience_multiple and plugin.name == "conscience" %}
 
+{% if openio_conscience_multiple_enable and plugin.name == "conscience" %}
 # Multi-conscience
 param_hub.me=tcp://{{ openio_conscience_multiple.me }}
 param_hub.group={{ openio_conscience_multiple.group | map('regex_replace', '(.*)', 'tcp://\\1') | list | join(',') }}
