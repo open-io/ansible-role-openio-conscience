@@ -2,7 +2,7 @@
 - name: Install packages
   package:
     name: "{{ pkg }}"
-    state: present
+    state: "{{ 'latest' if openio_conscience_package_upgrade else 'present' }}"
   with_items: "{{ conscience_packages }}"
   loop_control:
     loop_var: pkg
