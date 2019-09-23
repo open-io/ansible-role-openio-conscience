@@ -34,6 +34,7 @@ An Ansible role for conscience. Specifically, the responsibilities of this role 
 | `openio_conscience_timeout_read_operations` | `1000` | Timeout for read connection |
 | `openio_conscience_version` | `latest` | Install a specific version |
 | `openio_conscience_provision_only` | `false` | Provision only, without restarting the services |
+| `openio_conscience_package_upgrade` | `false` | Set the packages to the latest version (to be set in extra_vars) |
 
 ## Dependencies
 
