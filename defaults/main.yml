@@ -91,6 +91,10 @@ openio_conscience_services:
     score_expr: "(num stat.cpu)"
     score_timeout: "{{ openio_conscience_services_common_timeout }}"
     score_lock_at_first_register: false
+  oioswift:
+    score_expr: "(num tag.up) * (1 + (num stat.cpu))"
+    score_timeout: "{{ openio_conscience_services_common_timeout }}"
+    score_lock_at_first_register: false
 
 openio_conscience_persistence_period: 30
 ...
