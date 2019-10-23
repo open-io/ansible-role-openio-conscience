@@ -34,7 +34,7 @@
 [pool:{{ pool.name }}]
 targets={% for target in pool.targets %}{{target.count}},{{target.slot}},{{target.fallback}}{% if not loop.last %};{% endif %}{% endfor %}
 
-{% for key, value in pool.iteritems() %}
+{% for key, value in pool.items() | list %}
 {% if key != 'name' and key != 'targets' %}
 {{ key }}={{ value }}
 {% endif %}
@@ -45,7 +45,7 @@ targets={% for target in pool.targets %}{{target.count}},{{target.slot}},{{targe
 # Service types declarations
 # ---------------------------
 
-{% for service, values in openio_conscience_services.iteritems()%}
+{% for service, values in openio_conscience_services.items() | list %}
 [type:{{service}}]
 score_expr={{values.score_expr}}
 score_timeout={{values.score_timeout}}
