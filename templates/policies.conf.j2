@@ -6,7 +6,7 @@
 # The first word is the service pool to use,
 # the second word is the data security to use.
 {% set storage = storage_policies | combine(openio_conscience_storage_policies_custom) %}
-{% for policyname, policy in storage.iteritems() %}
+{% for policyname, policy in storage.items() | list %}
 {{ policyname }}={{ policy }}
 {% endfor %}
 
@@ -24,6 +24,6 @@
 # "shss"                   EC_BACKEND_SHSS
 # "liberasurecode_rs_vand" EC_BACKEND_LIBERASURECODE_RS_VAND
 {% set data = data_security | combine(openio_conscience_data_security_custom) %}
-{% for securityname, security in data.iteritems() %}
+{% for securityname, security in data.items() | list %}
 {{ securityname }}={{ security }}
 {% endfor %}

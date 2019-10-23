@@ -28,7 +28,7 @@ load_ns_info=false
 
 {% for plugin in openio_conscience_plugins %}
 [Plugin.{{ plugin.name }}]
-{% for key, value in plugin.iteritems() %}
+{% for key, value in plugin.items() | list %}
 {% if key != 'name' %}
 {{ key }}={{ value }}
 {% endif %}
