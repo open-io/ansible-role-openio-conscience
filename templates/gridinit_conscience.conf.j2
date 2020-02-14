@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 [Service.{{ openio_conscience_namespace }}-{{ openio_conscience_servicename }}]
-command=/usr/bin/oio-daemon -s OIO,{{ openio_conscience_namespace }},conscience,{{ openio_conscience_serviceid }} /etc/oio/sds/{{ openio_conscience_namespace }}/{{ openio_conscience_servicename }}/{{ openio_conscience_servicename }}.conf {% if not openio_conscience_multiple_enable %}-O PersistencePath={{ openio_conscience_persistence_file }} {% endif %}-O PersistencePeriod={{ openio_conscience_persistence_period }}
+command=/usr/bin/oio-daemon -s OIO,{{ openio_conscience_namespace }},conscience,{{ openio_conscience_serviceid }} {{ openio_conscience_sysconfig_dir }}/{{ openio_conscience_servicename }}/{{ openio_conscience_servicename }}.conf {% if not openio_conscience_multiple_enable %}-O PersistencePath={{ openio_conscience_persistence_file }} {% endif %}-O PersistencePeriod={{ openio_conscience_persistence_period }}
 enabled=true
 start_at_boot=true
 on_die=respawn
