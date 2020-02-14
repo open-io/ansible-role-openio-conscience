@@ -1,4 +1,3 @@
-# roles/conscience/defaults/main.yml
 ---
 openio_conscience_namespace: "{{ namespace | default('OPENIO') }}"
 openio_conscience_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
@@ -100,4 +99,13 @@ openio_conscience_services:
     score_timeout: "{{ openio_conscience_services_common_timeout }}"
 
 openio_conscience_persistence_period: 30
+
+openio_conscience_sysconfig_dir: "/etc/oio/sds/{{ openio_conscience_namespace }}"
+openio_conscience_servicename: "conscience-{{ openio_conscience_serviceid }}"
+openio_conscience_storage_policies_definition_file: "{{ openio_conscience_sysconfig_dir }}/\
+  conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-policies.conf"
+openio_conscience_services_file: "{{ openio_conscience_sysconfig_dir }}/\
+  conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-services.conf"
+openio_conscience_persistence_file: "{{ openio_conscience_sysconfig_dir }}/\
+  conscience-{{ openio_conscience_serviceid }}/conscience-{{ openio_conscience_serviceid }}-persistence.dat"
 ...
