@@ -4,7 +4,7 @@ openio_conscience_serviceid: "{{ 0 + openio_legacy_serviceid | d(0) | int }}"
 
 openio_conscience_version: 'latest'
 
-openio_conscience_provision_only: false
+openio_conscience_provision_only: "{{ openio_maintenance_mode | d(false) | bool }}"
 openio_conscience_package_upgrade: "{{ openio_package_upgrade | d(false) }}"
 
 openio_conscience_inventory_groupname: "conscience"
@@ -13,8 +13,8 @@ openio_conscience_bind_interface: "{{ ansible_default_ipv4.alias }}"
 openio_conscience_bind_address: "{{ openio_bind_address \
   | default(hostvars[inventory_hostname]['ansible_' + openio_conscience_bind_interface]['ipv4']['address']) }}"
 openio_conscience_bind_port: 6000
-openio_conscience_gridinit_dir: "/etc/gridinit.d/{{ openio_conscience_namespace }}"
-openio_conscience_gridinit_file_prefix: ""
+openio_conscience_gridinit_dir: "{{ openio_gridinit_d | d('/etc/gridinit.d/') }}"
+openio_conscience_gridinit_file_prefix: "{{ openio_conscience_namespace }}-"
 
 openio_conscience_timeout_read_operations: 1000
 openio_conscience_timeout_accepting_connection: 1000
