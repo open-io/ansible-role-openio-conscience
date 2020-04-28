@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-conscience.svg?branch=19.10)](https://travis-ci.org/open-io/ansible-role-openio-conscience)
+[![Build Status](https://travis-ci.org/open-io/ansible-role-openio-conscience.svg?branch=20.04)](https://travis-ci.org/open-io/ansible-role-openio-conscience)
 # Ansible role `conscience`
 
 An Ansible role for conscience. Specifically, the responsibilities of this role are to:
